@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Майнкрафт Сервер | ggsmdgg vanilla</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0a0a0f;
+            --secondary-dark: #12121a;
+            --primary-purple: #8a2be2;
+            --secondary-purple: #6a0dad;
+            --accent-purple: #9b30ff;
+            --light-purple: #c77dff;
+            --text-light: #f0f0f0;
+            --text-gray: #b0b0c0;
+            --card-bg: rgba(30, 30, 40, 0.8);
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(106, 13, 173, 0.15) 0%, transparent 25%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--primary-purple);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: var(--primary-purple);
+            font-size: 32px;
+            filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.7));
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-purple);
+            background-color: rgba(138, 43, 226, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--light-purple);
+            background-color: rgba(138, 43, 226, 0.25);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background-color: var(--primary-purple);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+            background: rgba(30, 30, 40, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .developer-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--secondary-dark), #1a1a2e);
+            padding: 20px 40px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-purple);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+            margin-top: 40px;
+            animation: pulse 2s infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.5); }
+            50% { box-shadow: 0 0 45px rgba(138, 43, 226, 0.8); }
+            100% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.5); }
+        }
+
+        .developer-icon {
+            font-size: 32px;
+            margin-right: 20px;
+            color: var(--light-purple);
+        }
+
+        .developer-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            padding: 80px 0;
+        }
+
+        .tabs-header {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .tab-btn {
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            border: 2px solid var(--secondary-purple);
+            padding: 18px 35px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(138, 43, 226, 0.2);
+            border-color: var(--primary-purple);
+            transform: translateY(-5px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+            border-color: var(--primary-purple);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Tab Content Styles */
+        .tab-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--primary-purple);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: var(--light-purple);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .tab-title i {
+            color: var(--primary-purple);
+            filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.7));
+        }
+
+        .tab-subtitle {
+            font-size: 24px;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(106, 13, 173, 0.08));
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .info-card h3 {
+            color: var(--light-purple);
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .info-card p {
+            line-height: 1.7;
+            color: var(--text-gray);
+            font-size: 18px;
+        }
+
+        .feature-list {
+            list-style-type: none;
+        }
+
+        .feature-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .feature-list li:before {
+            content: '✔';
+            color: var(--primary-purple);
+            font-weight: bold;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+
+        .rule-item {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .rule-number {
+            background-color: var(--primary-purple);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        /* Streamers Section */
+        .streamers-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .main-streamer {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(106, 13, 173, 0.2));
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 3px solid var(--primary-purple);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-streamer-icon {
+            font-size: 64px;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.7));
+        }
+
+        .main-streamer-name {
+            font-size: 36px;
+            color: var(--light-purple);
+            margin-bottom: 15px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .other-streamers-title {
+            font-size: 28px;
+            color: var(--light-purple);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .other-streamers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .streamer-card {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(106, 13, 173, 0.1));
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+            width: 220px;
+        }
+
+        .streamer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.3);
+            border-color: var(--primary-purple);
+        }
+
+        .streamer-icon {
+            font-size: 48px;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+        }
+
+        .streamer-name {
+            font-size: 22px;
+            color: var(--light-purple);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .streamer-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .streamer-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .server-ip {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+            border: 2px solid var(--light-purple);
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--secondary-dark), #1a1a2e);
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 15px;
+            border: 2px solid var(--primary-purple);
+            transition: all 0.3s ease;
+        }
+
+        .download-link:hover {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .download-link i {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .main-rule {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.25), rgba(106, 13, 173, 0.15));
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 2px solid var(--primary-purple);
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--light-purple);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-dark);
+            padding: 40px 0;
+            margin-top: 80px;
+            border-top: 2px solid var(--primary-purple);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-gray);
+            font-size: 18px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tg-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
+            border-color: var(--light-purple);
+        }
+
+        .tg-link i {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        .telegram-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(106, 13, 173, 0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .telegram-title {
+            font-size: 28px;
+            color: var(--light-purple);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .telegram-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: rgba(10, 10, 15, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 2px solid var(--primary-purple);
+                border-bottom: 2px solid var(--primary-purple);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .tab-btn {
+                padding: 15px 25px;
+                font-size: 18px;
+            }
+            
+            .tab-card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .developer-text {
+                font-size: 24px;
+            }
+            
+            .tab-title {
+                font-size: 30px;
+            }
+            
+            .server-ip {
+                font-size: 22px;
+                padding: 15px 30px;
+            }
+            
+            .main-streamer {
+                padding: 30px 20px;
+            }
+            
+            .main-streamer-icon {
+                font-size: 48px;
+            }
+            
+            .main-streamer-name {
+                font-size: 28px;
+            }
+            
+            .streamer-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .other-streamers {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .telegram-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tg-link {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-cube logo-icon"></i>
+                    <div class="logo-text">Майнкрафт Сервер</div>
+                </div>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="#" class="nav-link active" data-tab="home">Главная</a>
+                    <a href="#" class="nav-link" data-tab="server">Сервер</a>
+                    <a href="#" class="nav-link" data-tab="rules">Правила</a>
+                    <a href="#" class="nav-link" data-tab="streamers">Стримеры</a>
+                    <a href="#" class="nav-link" data-tab="download">Установка</a>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Добро пожаловать на наш Minecraft Server!</h1>
+            <p class="hero-subtitle">
+                Уникальный Minecraft-сервер, созданный стримерами для тех, кто любит ванильную атмосферу, но хочет чуть больше магии, RPG и приключений! Присоединяйся к нашему дружелюбному комьюнити и погрузись в увлекательный мир магии и приключений.
+            </p>
+            
+            <div class="developer-badge">
+                <i class="fas fa-code developer-icon"></i>
+                <div class="developer-text">Разработчик: ZLAFIK</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="tabs-section">
+        <div class="container">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="home">Главная</button>
+                <button class="tab-btn" data-tab="server">Сервер</button>
+                <button class="tab-btn" data-tab="rules">Правила</button>
+                <button class="tab-btn" data-tab="streamers">Стримеры</button>
+                <button class="tab-btn" data-tab="download">Установка</button>
+            </div>
+            
+            <!-- Главная вкладка -->
+            <div id="home-tab" class="tab-content active">
+                <div class="tab-card">
+                    <h2 class="tab-title"><i class="fas fa-home"></i> О нашем сервере</h2>
+                    <p style="text-align: center;">Приветствуем тебя на нашем уникальном Minecraft-сервере! Мы создали этот проект для игроков, которые ценят классическую ванильную атмосферу, но хотят большего - больше магии, больше RPG элементов и больше захватывающих приключений.</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>Что вас ждет?</h3>
+                            <ul class="feature-list">
+                                <li>Прокачка персонажа за опыт, сражения с боссами и увлекательный геймплей!</li>
+                                <li>Дружелюбное и веселое комьюнити, готовое поддержать каждого игрока!</li>
+                                <li>Уютная атмосфера для выживания и строительства!</li>
+                                <li>Интересные ивенты с крутыми наградами!</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>Особенности</h3>
+                            <ul class="feature-list">
+                                <li>Уникальные моды для погружения в мир магии и RPG</li>
+                                <li>Сбалансированный геймплей с элементами выживания</li>
+                                <li>Активное и отзывчивое сообщество игроков</li>
+                                <li>Регулярные обновления и мероприятия</li>
+                                <li>Полностью бесплатный доступ к серверу</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="main-rule">
+                        ⚡ ВСЁ БЕСПЛАТНО НА СЕРВЕРЕ ⚡
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Сервер вкладка -->
+            <div id="server-tab" class="tab-content">
+                <div class="tab-card">
+                    <h2 class="tab-title"><i class="fas fa-server"></i> Информация о сервере</h2>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>Техническая информация</h3>
+                            <p><strong>Версия:</strong> Forge 1.20.1</p>
+                            <p><strong>Расположение:</strong> Германия</p>
+                            <p><strong>Тип:</strong> Ваниль+ с элементами RPG и магии</p>
+                            <p><strong>Модпак:</strong> Кастомный сборка от создателей</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>Подключение</h3>
+                            <p>Для подключения к серверу используй следующий IP-адрес:</p>
+                            <div class="server-ip">107.161.154.234:25573</div>
+                            <p>Скопируй этот адрес и вставь в меню мультиплеера Minecraft!</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="tab-subtitle" style="margin-top: 40px;"><i class="fas fa-gamepad"></i> Особенности геймплея</h3>
+                    <ul class="feature-list">
+                        <li>Улучшенная система прокачки персонажа через получение опыта</li>
+                        <li>Эпические битвы с уникальными боссами</li>
+                        <li>Магические способности и заклинания</li>
+                        <li>Глубокие RPG-механики для погружения в игру</li>
+                        <li>Квесты и задания для получения редких наград</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Правила вкладка -->
+            <div id="rules-tab" class="tab-content">
+                <div class="tab-card">
+                    <h2 class="tab-title"><i class="fas fa-book"></i> Кодекс майнкрафтера</h2>
+                    <p style="text-align: center;">Для поддержания дружелюбной атмосферы и комфортной игры для всех участников, просим соблюдать следующие правила:</p>
+                    
+                    <h3 class="tab-subtitle"><i class="fas fa-ban"></i> Основные запреты</h3>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">1</div>
+                        <div>Запрещены любые действия, направленные на порчу имущества других игроков (гриферство).</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">2</div>
+                        <div>Кража ресурсов, предметов и любого имущества других игроков строго запрещена.</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">3</div>
+                        <div>Нельзя убивать прирученных мобов или мобов, находящихся на территории других игроков.</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">4</div>
+                        <div>Запрещено намеренно портить игровой мир: создавать хаотичные постройки, выкапывать глубокие ямы без цели, оставлять "столбы земли", незавершенные строения.</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">5</div>
+                        <div>Не допускаются постройки, оскорбляющие других игроков, разжигающие рознь или имеющие неэстетичный вид.</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">6</div>
+                        <div>Запрещены конструкции, которые негативно влияют на производительность сервера или территорию других игроков.</div>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-number">7</div>
+                        <div>Использование читов, стороннего ПО, дающего преимущество в игре, строго запрещено.</div>
+                    </div>
+                    
+                    <h3 class="tab-subtitle" style="margin-top: 40px;"><i class="fas fa-comments"></i> Правила общения</h3>
+                    <ul class="feature-list">
+                        <li>Уважайте других игроков и администрацию сервера</li>
+                        <li>Запрещены оскорбления, нецензурная лексика, дискриминация по любым признакам</li>
+                        <li>Не допускается флуд, спам, провокации и вымогательства</li>
+                        <li>Чаты - общее пространство, соблюдайте чистоту общения</li>
+                    </ul>
+                    
+                    <h3 class="tab-subtitle" style="margin-top: 40px;"><i class="fas fa-user-shield"></i> Безопасность аккаунтов</h3>
+                    <ul class="feature-list">
+                        <li>Владелец аккаунта несет полную ответственность за все действия, совершенные с его аккаунта</li>
+                        <li>Игра на чужом аккаунте, взлом и брут-атаки наказуемы перманентным баном</li>
+                        <li>Создание мультиаккаунтов для обхода бана запрещено</li>
+                        <li>В случае кражи аккаунта немедленно свяжитесь с администрацией</li>
+                    </ul>
+                    
+                    <div class="main-rule">
+                        <i class="fas fa-exclamation-triangle"></i> Администрация сервера оставляет за собой право принимать решения в спорных ситуациях на свое усмотрение
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Стримеры вкладка -->
+            <div id="streamers-tab" class="tab-content">
+                <div class="tab-card">
+                    <h2 class="tab-title"><i class="fas fa-video"></i> Стримеры-создатели</h2>
+                    <p style="text-align: center;">Наш сервер был создан при участии известных стримеров. Подписывайтесь на их каналы, чтобы быть в курсе всех новостей и мероприятий!</p>
+                    
+                    <div class="streamers-container">
+                        <!-- Главный стример - GGSMDGG по центру -->
+                        <div class="main-streamer">
+                            <i class="fas fa-crown main-streamer-icon"></i>
+                            <h3 class="main-streamer-name">GGSMDGG</h3>
+                            <a href="https://www.twitch.tv/ggsmdgg" target="_blank" class="streamer-link">
+                                <i class="fab fa-twitch"></i> Перейти на Twitch
+                            </a>
+                        </div>
+                        
+                        <h3 class="other-streamers-title">Другие участники проекта</h3>
+                        
+                        <div class="other-streamers">
+                            <div class="streamer-card">
+                                <i class="fas fa-gamepad streamer-icon"></i>
+                                <h3 class="streamer-name">KASHIRENOK</h3>
+                                <a href="https://www.twitch.tv/kashirenok_" target="_blank" class="streamer-link">
+                                    <i class="fab fa-twitch"></i> Twitch
+                                </a>
+                            </div>
+                            
+                            <div class="streamer-card">
+                                <i class="fas fa-magic streamer-icon"></i>
+                                <h3 class="streamer-name">PAZZZEL</h3>
+                                <a href="https://www.twitch.tv/pazzzel" target="_blank" class="streamer-link">
+                                    <i class="fab fa-twitch"></i> Twitch
+                                </a>
+                            </div>
+                            
+                            <div class="streamer-card">
+                                <i class="fas fa-dragon streamer-icon"></i>
+                                <h3 class="streamer-name">M1SFIT_TV</h3>
+                                <a href="https://www.twitch.tv/m1sfit_tv" target="_blank" class="streamer-link">
+                                    <i class="fab fa-twitch"></i> Twitch
+                                </a>
+                            </div>
+                            
+                            <div class="streamer-card">
+                                <i class="fas fa-fire streamer-icon"></i>
+                                <h3 class="streamer-name">HEY_DERZKIY</h3>
+                                <a href="https://www.twitch.tv/hey_derzkiy" target="_blank" class="streamer-link">
+                                    <i class="fab fa-twitch"></i> Twitch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Установка вкладка -->
+            <div id="download-tab" class="tab-content">
+                <div class="tab-card">
+                    <h2 class="tab-title"><i class="fas fa-download"></i> Установка и запуск</h2>
+                    <p style="text-align: center;">Для игры на нашем сервере необходимо установить специальный модпак. Следуй инструкциям ниже, чтобы начать играть!</p>
+                    
+                    <h3 class="tab-subtitle"><i class="fas fa-film"></i> Видео-инструкция</h3>
+                    <p style="text-align: center;">Посмотри подробную видео-инструкцию по установке модпака и настройке клиента:</p>
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="https://www.youtube.com/watch?v=l3HqWguLyLY" target="_blank" class="download-link">
+                            <i class="fab fa-youtube"></i> Смотреть на YouTube
+                        </a>
+                    </div>
+                    
+                    <h3 class="tab-subtitle"><i class="fas fa-file-archive"></i> Скачать модпак</h3>
+                    <p style="text-align: center;">Скачай наш специально подготовленный модпак, который содержит все необходимые моды для игры на сервере:</p>
+                    
+                    <div class="links-container">
+                        <a href="https://drive.google.com/file/d/1efK3JvNeV2SYsy4tfz0E4KL_6YQZA4z-/view?usp=sharing" target="_blank" class="download-link">
+                            <i class="fas fa-download"></i> Скачать модпак
+                        </a>
+                        
+                        <a href="https://docs.google.com/spreadsheets/d/17Zhoa140TAy_ij41Ot_eNtgWU_tQXyS4/edit?usp=sharing&ouid=111920150246117797311&rtpof=true&sd=true" target="_blank" class="download-link">
+                            <i class="fas fa-table"></i> Excel с модами
+                        </a>
+                    </div>
+                    
+                    <h3 class="tab-subtitle" style="margin-top: 40px;"><i class="fas fa-list-ol"></i> Пошаговая инструкция</h3>
+                    <ul class="feature-list">
+                        <li>Установи Minecraft Forge версии 1.20.1</li>
+                        <li>Скачай модпак по ссылке выше</li>
+                        <li>Распакуй содержимое архива в папку .minecraft</li>
+                        <li>Запусти Minecraft с установленным Forge</li>
+                        <li>Добавь сервер в список по IP: 107.161.154.234:25573</li>
+                        <li>Наслаждайся игрой на нашем сервере!</li>
+                    </ul>
+                    
+                    <div class="main-rule">
+                        <i class="fas fa-headset"></i> Возникли проблемы с установкой? Обращайся за помощью в наши Telegram-каналы или к администрации сервера!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                <i class="fas fa-cube logo-icon"></i>
+                <div class="logo-text">ggsmdgg vanilla</div>
+            </div>
+            
+            <p class="footer-text">© 2023 ggsmdgg vanilla. Все права защищены. Сервер создан стримерами для игроков.</p>
+            <p class="footer-text">Minecraft является товарным знаком Mojang AB. Наш сервер не аффилирован с Mojang или Microsoft.</p>
+            
+            <div class="telegram-section">
+                <h3 class="telegram-title">Наши Telegram каналы:</h3>
+                
+                <div class="telegram-links">
+                    <a href="https://t.me/ggsmdgg" target="_blank" class="tg-link">
+                        <i class="fab fa-telegram"></i> GGSMDGG
+                    </a>
+                    
+                    <a href="https://t.me/Hey_Derzkiy" target="_blank" class="tg-link">
+                        <i class="fab fa-telegram"></i> Hey_Derzkiy
+                    </a>
+                    
+                    <a href="https://t.me/kashirenok_rina" target="_blank" class="tg-link">
+                        <i class="fab fa-telegram"></i> Kashirenok
+                    </a>
+                    
+                    <a href="https://t.me/supermaxiq" target="_blank" class="tg-link">
+                        <i class="fab fa-telegram"></i> Pazzel
+                    </a>
+                    
+                    <a href="https://t.me/m1sfit_tv" target="_blank" class="tg-link">
+                        <i class="fab fa-telegram"></i> M1sfit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinksContainer = document.getElementById('navLinks');
+        
+        // Function to switch tabs
+        function switchTab(tabId) {
+            // Hide all tab contents
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Remove active class from all nav links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            
+            // Activate the corresponding tab button
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Activate the corresponding nav link
+            document.querySelector(`.nav-link[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Close mobile menu if open
+            if (navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
+            }
+        }
+        
+        // Add click event listeners to tab buttons
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+        
+        // Add click event listeners to nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#navLinks') && !e.target.closest('#mobileMenuBtn')) {
+                navLinksContainer.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
