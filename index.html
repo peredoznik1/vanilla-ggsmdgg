@@ -354,65 +354,29 @@
             box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
 
-        /* Streamers Section */
+        /* Streamers Section - Обновленные стили */
         .streamers-container {
             text-align: center;
             margin-top: 40px;
         }
 
-        .main-streamer {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(106, 13, 173, 0.2));
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 50px;
-            border: 3px solid var(--primary-purple);
-            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.3);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .main-streamer-icon {
-            font-size: 64px;
-            color: var(--primary-purple);
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.7));
-        }
-
-        .main-streamer-name {
-            font-size: 36px;
-            color: var(--light-purple);
-            margin-bottom: 15px;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .other-streamers-title {
-            font-size: 28px;
-            color: var(--light-purple);
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .other-streamers {
+        .streamers-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             margin-top: 30px;
         }
 
         .streamer-card {
             background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(106, 13, 173, 0.1));
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px 20px;
             text-align: center;
             border: 1px solid rgba(138, 43, 226, 0.3);
             transition: all 0.3s ease;
-            width: 220px;
+            width: 180px;
+            flex: 0 0 auto;
         }
 
         .streamer-card:hover {
@@ -422,34 +386,46 @@
         }
 
         .streamer-icon {
-            font-size: 48px;
+            font-size: 42px;
             color: var(--primary-purple);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
         }
 
         .streamer-name {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--light-purple);
             margin-bottom: 15px;
             font-weight: 700;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .streamer-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
             color: white;
             text-decoration: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 10px;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: 5px;
             transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
         }
 
         .streamer-link:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .streamer-link i {
+            margin-right: 8px;
         }
 
         .server-ip {
@@ -577,6 +553,20 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .streamer-card {
+                width: 160px;
+            }
+            
+            .streamer-icon {
+                font-size: 38px;
+            }
+            
+            .streamer-name {
+                font-size: 18px;
+            }
+        }
+
         @media (max-width: 992px) {
             .nav-links {
                 display: none;
@@ -611,6 +601,29 @@
             .tab-card {
                 padding: 30px;
             }
+            
+            .streamers-row {
+                gap: 20px;
+            }
+            
+            .streamer-card {
+                width: 140px;
+                padding: 20px 15px;
+            }
+            
+            .streamer-icon {
+                font-size: 36px;
+            }
+            
+            .streamer-name {
+                font-size: 16px;
+                min-height: 40px;
+            }
+            
+            .streamer-link {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -631,26 +644,25 @@
                 padding: 15px 30px;
             }
             
-            .main-streamer {
-                padding: 30px 20px;
-            }
-            
-            .main-streamer-icon {
-                font-size: 48px;
-            }
-            
-            .main-streamer-name {
-                font-size: 28px;
+            .streamers-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
             }
             
             .streamer-card {
                 width: 100%;
-                max-width: 300px;
+                max-width: 250px;
+                padding: 25px;
             }
             
-            .other-streamers {
-                flex-direction: column;
-                align-items: center;
+            .streamer-icon {
+                font-size: 40px;
+            }
+            
+            .streamer-name {
+                font-size: 20px;
+                min-height: auto;
             }
             
             .telegram-links {
@@ -662,6 +674,29 @@
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+                padding: 20px;
+            }
+            
+            .developer-text {
+                font-size: 20px;
+            }
+            
+            .tab-title {
+                font-size: 26px;
+            }
+            
+            .streamer-card {
+                max-width: 100%;
             }
         }
     </style>
@@ -850,25 +885,22 @@
                 </div>
             </div>
             
-            <!-- Стримеры вкладка -->
+            <!-- Стримеры вкладка - ОБНОВЛЕННАЯ ВЕРСИЯ -->
             <div id="streamers-tab" class="tab-content">
                 <div class="tab-card">
                     <h2 class="tab-title"><i class="fas fa-video"></i> Стримеры-создатели</h2>
-                    <p style="text-align: center;">Наш сервер был создан при участии известных стримеров. Подписывайтесь на их каналы, чтобы быть в курсе всех новостей и мероприятий!</p>
+                    <p style="text-align: center; margin-bottom: 40px;">Наш сервер был создан при участии известных стримеров. Все они равноправные создатели проекта. Подписывайтесь на их каналы, чтобы быть в курсе всех новостей и мероприятий!</p>
                     
                     <div class="streamers-container">
-                        <!-- Главный стример - GGSMDGG по центру -->
-                        <div class="main-streamer">
-                            <i class="fas fa-crown main-streamer-icon"></i>
-                            <h3 class="main-streamer-name">GGSMDGG</h3>
-                            <a href="https://www.twitch.tv/ggsmdgg" target="_blank" class="streamer-link">
-                                <i class="fab fa-twitch"></i> Перейти на Twitch
-                            </a>
-                        </div>
-                        
-                        <h3 class="other-streamers-title">Другие участники проекта</h3>
-                        
-                        <div class="other-streamers">
+                        <div class="streamers-row">
+                            <div class="streamer-card">
+                                <i class="fas fa-crown streamer-icon"></i>
+                                <h3 class="streamer-name">GGSMDGG</h3>
+                                <a href="https://www.twitch.tv/ggsmdgg" target="_blank" class="streamer-link">
+                                    <i class="fab fa-twitch"></i> Twitch
+                                </a>
+                            </div>
+                            
                             <div class="streamer-card">
                                 <i class="fas fa-gamepad streamer-icon"></i>
                                 <h3 class="streamer-name">KASHIRENOK</h3>
@@ -901,6 +933,10 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="main-rule" style="margin-top: 50px;">
+                        <i class="fas fa-users"></i> Все стримеры являются равноправными создателями проекта!
                     </div>
                 </div>
             </div>
